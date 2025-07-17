@@ -232,6 +232,7 @@ local gdproject = io.open(vim.fn.getcwd() .. '/project.godot', 'r')
 if gdproject then
   io.close(gdproject)
   vim.fn.serverstart './godothost'
+  vim.o.tabstop = 4
 end
 
 -- [[ Configure and install plugins ]]
@@ -422,6 +423,9 @@ require('lazy').setup({
         --   },
         -- },
         -- pickers = {}
+        defaults = {
+          file_ignore_patterns = { '%.uid' },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
