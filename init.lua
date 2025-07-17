@@ -908,6 +908,17 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'mocte4/godotcolour-vim',
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      local project_file = vim.fs.root(0, '/project.godot')
+      if project_file then
+        vim.cmd.colorscheme 'godotcolour'
+      end
+    end,
+  },
+
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
