@@ -233,6 +233,7 @@ if gdproject then
   io.close(gdproject)
   vim.fn.serverstart './godothost'
   vim.o.tabstop = 4
+  vim.o.shiftwidth = 4
 end
 
 -- [[ Configure and install plugins ]]
