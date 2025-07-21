@@ -228,13 +228,18 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
-local gdproject = io.open(vim.fn.getcwd() .. '/project.godot', 'r')
-if gdproject then
-  io.close(gdproject)
-  vim.fn.serverstart './godothost'
-  vim.o.tabstop = 4
-  vim.o.shiftwidth = 4
-end
+local port = 6006
+local cmd = vim.lsp.rpc.connect('127.0.0.1', port)
+local pipe = '/path/godot.pipe' -- I use /tmp/godot.pipe
+
+vim.lsp.start {
+  name = 'Godot',
+  cmd = cmd,
+  root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
+  on_attach = function(client, bufnr)
+    vim.api.nvim_command('echo serverstart("' .. pipe .. '")')
+  end,
+}
 
 -- [[ Configure and install plugins ]]
 --
