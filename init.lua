@@ -166,6 +166,9 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -227,19 +230,6 @@ end
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
-
-local port = 6006
-local cmd = vim.lsp.rpc.connect('127.0.0.1', port)
-local pipe = '/path/godot.pipe' -- I use /tmp/godot.pipe
-
-vim.lsp.start {
-  name = 'Godot',
-  cmd = cmd,
-  root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
-  on_attach = function(client, bufnr)
-    vim.api.nvim_command('echo serverstart("' .. pipe .. '")')
-  end,
-}
 
 -- [[ Configure and install plugins ]]
 --
@@ -430,7 +420,7 @@ require('lazy').setup({
         -- },
         -- pickers = {}
         defaults = {
-          file_ignore_patterns = { '%.uid' },
+          file_ignore_patterns = { '%.uid', '%.import', '%.png', '%.svg', '%.ttf' },
         },
         extensions = {
           ['ui-select'] = {
@@ -679,6 +669,17 @@ require('lazy').setup({
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+      -- configure godot manually because it doesn't work with mason
+      vim.lsp.start {
+        name = 'Godot',
+        cmd = vim.lsp.rpc.connect('127.0.0.1', 6006),
+        root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
+        on_attach = function(client, bufnr)
+          vim.api.nvim_command 'echo serverstart("/tmp/godot.pipe")'
+        end,
+      }
+
       require('lspconfig').gdscript.setup(capabilities)
 
       -- Enable the following language servers
@@ -1063,6 +1064,10 @@ require('lazy').setup({
     },
   },
 })
+
+require('luasnip.loaders.from_lua').load {
+  paths = '~/.config/nvim/lua/snippets/',
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=0 sw=2
