@@ -7,6 +7,7 @@ vim.g.have_nerd_font = true
 
 require 'custom.options'
 require 'custom.keymaps'
+require 'custom.autocommands'
 require 'custom.lazy'
 
 require('luasnip.loaders.from_lua').load {
