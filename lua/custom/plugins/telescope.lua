@@ -53,6 +53,21 @@ return {
       --   },
       -- },
       -- pickers = {}
+      pickers = {
+        find_files = {
+          mappings = {
+            n = {
+              ['cd'] = function(prompt_bufnr)
+                local selection = require('telescope.actions.state').get_selected_entry()
+                local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+                require('telescope.actions').close(prompt_bufnr)
+                -- depending on what you want put `cd`, `lcd`, `tcd`
+                vim.cmd(string.format('silent lcd %s', dir))
+              end,
+            },
+          },
+        },
+      },
       defaults = {
         file_ignore_patterns = { '%.uid', '%.import', '%.png', '%.svg', '%.ttf' },
       },
