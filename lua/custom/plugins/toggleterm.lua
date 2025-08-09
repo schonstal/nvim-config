@@ -28,6 +28,22 @@ return {
       end
 
       require('toggleterm').exec(command, 1, 0, project_root)
-    end, { desc = 'Test [T]his File' })
+    end, { desc = '[T]est [T]his File' })
+
+    vim.keymap.set('n', '<leader>ta', function()
+      local command = string.format 'godot --headless -d -s addons/gut/gut_cmdln.gd -gdir=test/'
+
+      local project_root = vim.fs.root(0, { 'project.godot' })
+      if project_root == nil then
+        -- In case the project file is in godot/
+        local project_file = vim.fs.find({ 'project.godot' })[1]
+        project_root = vim.fs.dirname(project_file)
+        if project_root == nil then
+          return -- We're not in a godot project
+        end
+      end
+
+      require('toggleterm').exec(command, 1, 0, project_root)
+    end, { desc = '[T]est [A]ll Files' })
   end,
 }
