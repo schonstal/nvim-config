@@ -30,7 +30,7 @@ return {
       desc = ' [F]lash [T]reesitter',
     },
     {
-      '<leader>fr',
+      'r',
       mode = 'o',
       function()
         require('flash').remote()
@@ -38,7 +38,7 @@ return {
       desc = '[F]lash [R]emote',
     },
     {
-      '<leader>fR',
+      'R',
       mode = { 'o', 'x' },
       function()
         require('flash').treesitter_search()
