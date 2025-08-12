@@ -22,12 +22,12 @@ return {
       desc = 'Flash',
     },
     {
-      '<leader>ft',
+      'S',
       mode = { 'n', 'x', 'o' },
       function()
         require('flash').treesitter()
       end,
-      desc = ' [F]lash [T]reesitter',
+      desc = ' Flash Tree[S]itter',
     },
     {
       'r',
@@ -35,7 +35,7 @@ return {
       function()
         require('flash').remote()
       end,
-      desc = '[F]lash [R]emote',
+      desc = 'Flash [r]emote',
     },
     {
       'R',
@@ -43,7 +43,7 @@ return {
       function()
         require('flash').treesitter_search()
       end,
-      desc = '[F]lash [R]emote Treesitter',
+      desc = 'Flash [R]emote Treesitter',
     },
     {
       '<c-s>',
