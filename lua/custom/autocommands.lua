@@ -13,3 +13,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+vim.api.nvim_create_autocmd('DirChanged', {
+  desc = 'Start the godot server if we change to a godot directory',
+  callback = function()
+    require('godot-server').start_server()
+  end,
+})
