@@ -8,6 +8,20 @@ return {
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    {
+      'Teatek/gdscript-extended-lsp.nvim',
+      opts = {
+        doc_file_extension = '.md', -- Documentation file extension (can allow a better search in buffers list with telescope)
+        view_type = 'vsplit', -- Options : "current", "split", "vsplit", "tab", "floating"
+        split_side = false, -- (For split and vsplit only) Open on the right or top on false and on the left or bottom on true
+        keymaps = {
+          declaration = 'gd', -- Keymap to go to definition
+          close = { 'q', '<Esc>' }, -- Keymap for closing the documentation
+        },
+        floating_win_size = 0.8, -- Floating window size
+        picker = 'telescope', -- Options : "telescope", "snacks"
+      },
+    },
 
     -- Useful status updates for LSP.
     { 'j-hui/fidget.nvim', opts = {} },
