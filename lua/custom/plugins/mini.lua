@@ -1,6 +1,7 @@
 -- Collection of various small independent plugins/modules
 return {
   'echasnovski/mini.nvim',
+  event = 'VimEnter',
   config = function()
     -- Better Around/Inside textobjects
     --
@@ -47,7 +48,9 @@ return {
       return '%2l:%-2v'
     end
 
-    -- ... and there is more!
-    --  Check out: https://github.com/echasnovski/mini.nvim
+    require('mini.sessions').setup {
+      autowrite = true,
+      file = '.session.vim',
+    }
   end,
 }
