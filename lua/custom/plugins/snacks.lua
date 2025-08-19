@@ -11,7 +11,6 @@ return {
       toggles = { dim = false },
       enabled = true,
     },
-    scroll = { enabled = true },
     bigfile = { enabled = true },
     ---@type snacks.notifier.Config
     notifier = {
