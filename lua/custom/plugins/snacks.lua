@@ -11,6 +11,7 @@ return {
       toggles = { dim = false },
       enabled = true,
     },
+    scroll = { enabled = true },
     bigfile = { enabled = true },
     notifier = {
       enabled = true,
