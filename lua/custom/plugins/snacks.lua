@@ -44,6 +44,23 @@ return {
         },
       },
     },
+    ---@type snacks.indent.Config
+    indent = {
+      indent = {
+        enabled = true, -- enable indent guides
+      },
+      animate = {
+        style = 'out',
+        easing = 'outQuad',
+        duration = {
+          step = 10, -- ms per step
+          total = 200, -- maximum duration
+        },
+      },
+      scope = {
+        only_current = true, -- only show scope in the current window
+      },
+    },
     lazygit = { enabled = true },
     quickfile = { enabled = true },
     dashboard = {
@@ -520,8 +537,5 @@ return {
       end,
       desc = 'Toggle Zoom',
     },
-    -- TODO: Migrate from toggleterm
-    -- { "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
-    -- { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore" },
   },
 }
